@@ -1,10 +1,14 @@
-import { Container, Heading, Section } from "components";
+import { Container, CountryList, Heading, Loader, Section } from "components";
+import useFetchCountries from "../hooks/useFetchCountries";
 
 const Home = () => {
+  const {countries, error, loading} = useFetchCountries();
   return (
     <Section>
       <Container>
-        <Heading title="Home" bottom />
+        {error && <Heading title="Sorry, we have some troubles." bottom />}
+        {loading && <Loader/>}
+        {countries.length > 0 && <CountryList countries={countries}/>}
       </Container>
     </Section>
   );
